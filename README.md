@@ -36,8 +36,7 @@ Variables extracted per city per hour:
 ```
 azentrix-fullstack-task1/
 ├── pipeline/
-│   ├── etl.py          # Extract → Transform → Load + scheduler
-│   └── query.py        # Quick DB inspection queries
+│   └── etl.py          # Extract → Transform → Load + scheduler
 ├── db/
 │   └── weather.db      # SQLite database (auto-created on first run)
 ├── logs/
@@ -79,12 +78,6 @@ python pipeline/etl.py
 
 The pipeline will run immediately, then schedule itself every 24 hours.
 Check `logs/pipeline.log` and `db/weather.db` after the first run.
-
-### 5. Inspect the database
-
-```bash
-python pipeline/query.py
-```
 
 ---
 
