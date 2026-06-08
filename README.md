@@ -3,7 +3,7 @@
 An automated ETL pipeline that pulls **hourly weather data** from the
 [Open-Meteo API](https://open-meteo.com/) (free, no API key required, updates
 every hour), transforms it, and loads it into a local **SQLite** database.
-Runs on a 24-hour schedule via APScheduler.
+Designed for one-shot execution via cron job.
 
 ---
 
@@ -36,13 +36,13 @@ Variables extracted per city per hour:
 ```
 azentrix-fullstack-task1/
 ├── pipeline/
-│   └── etl.py          # Extract → Transform → Load + scheduler
+│   └── etl.py          # Extract → Transform → Load
 ├── db/
 │   └── weather.db      # SQLite database (auto-created on first run)
 ├── logs/
 │   └── pipeline.log    # Run log (auto-created on first run)
 ├── requirements.txt
-├── weather-etl.service # systemd unit for Arch Linux
+├── run_etl_once.sh     # cron wrapper
 └── README.md
 ```
 
@@ -81,46 +81,48 @@ Check `logs/pipeline.log` and `db/weather.db` after the first run.
 
 ---
 
-## Running as a systemd Service (Arch Linux)
+## Running with cronie / cron
 
-This keeps the pipeline alive across reboots.
+This repo supports one-shot ETL execution using cron. The script is designed
+to run once per schedule, log its output, and then exit.
 
-### 1. Edit the service file
-
-Open `weather-etl.service` and replace `YOUR_USER` with your actual username
-and adjust the paths if your project is in a different location.
-
-### 2. Install and enable
+### 1. Install cronie
 
 ```bash
-# Copy to systemd user services
-cp weather-etl.service ~/.config/systemd/user/weather-etl.service
-
-# Reload daemon
-systemctl --user daemon-reload
-
-# Enable (starts on login) and start now
-systemctl --user enable --now weather-etl.service
+sudo pacman -S cronie
+sudo systemctl enable --now cronie
 ```
 
-### 3. Check status
+### 2. Create a cron entry
+
+Edit your user crontab with:
 
 ```bash
-systemctl --user status weather-etl.service
-
-# Live logs
-journalctl --user -u weather-etl.service -f
+crontab -e
 ```
 
-### 4. To run at boot even without login (linger)
+Then add a line like this to run once per day at midnight UTC:
+
+```cron
+0 0 * * * /home/YOUR_USER/azentrix-fullstack-task1/run_etl_once.sh >> /home/YOUR_USER/azentrix-fullstack-task1/logs/cron.log 2>&1
+```
+
+If you prefer using the Python interpreter directly, use:
+
+```cron
+0 0 * * * /home/YOUR_USER/azentrix-fullstack-task1/.venv/bin/python /home/YOUR_USER/azentrix-fullstack-task1/pipeline/etl.py >> /home/YOUR_USER/azentrix-fullstack-task1/logs/cron.log 2>&1
+```
+
+### 3. Verify the cron job
 
 ```bash
-loginctl enable-linger $USER
+crontab -l
+journalctl -u cronie -f
 ```
 
 ---
 
-## Running with cronie / cron
+## Database Schema
 
 This repo now supports one-shot ETL execution via `python pipeline/etl.py --once`, which is suitable for cron jobs.
 
@@ -218,7 +220,4 @@ Every run appends to `logs/pipeline.log`:
    new columns.
 3. **Load** — `INSERT OR IGNORE` into SQLite so reruns are safe and
    idempotent. Each successful or failed run is recorded in `pipeline_runs`.
-4. **Schedule** — APScheduler `BlockingScheduler` with a 24-hour interval,
-   firing immediately on start then every 24 h thereafter.
-5. **Service** — systemd user service for Arch Linux ensures the process
-   survives reboots without root privileges.
+4. **Schedule** — use cron to run the pipeline once on a fixed schedule.
