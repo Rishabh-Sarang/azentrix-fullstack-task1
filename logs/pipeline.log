@@ -32,3 +32,36 @@
 2026-06-08 12:03:55,838  INFO      Added job "run_pipeline" to job store "default"
 2026-06-08 12:03:55,838  INFO      Scheduler started
 2026-06-08 12:04:12,075  INFO      Scheduler stopped.
+2026-06-08 12:24:58,767  INFO      Starting ETL scheduler — interval: 24 h
+2026-06-08 12:24:58,767  INFO      ============================================================
+2026-06-08 12:24:58,767  INFO      Pipeline run started
+2026-06-08 12:24:58,767  INFO        Extracting → Mumbai
+2026-06-08 12:24:59,473  INFO        Transforming → Mumbai
+2026-06-08 12:24:59,492  INFO        Loaded 0 new rows for Mumbai
+2026-06-08 12:24:59,493  INFO        Extracting → Delhi
+2026-06-08 12:25:00,151  INFO        Transforming → Delhi
+2026-06-08 12:25:00,167  INFO        Loaded 0 new rows for Delhi
+2026-06-08 12:25:00,167  INFO        Extracting → Indore
+2026-06-08 12:25:01,294  INFO        Transforming → Indore
+2026-06-08 12:25:01,311  INFO        Loaded 0 new rows for Indore
+2026-06-08 12:25:01,311  INFO        Extracting → Bangalore
+2026-06-08 12:25:01,993  INFO        Transforming → Bangalore
+2026-06-08 12:25:02,007  INFO        Loaded 0 new rows for Bangalore
+2026-06-08 12:25:02,007  INFO        Extracting → Chennai
+2026-06-08 12:25:02,780  INFO        Transforming → Chennai
+2026-06-08 12:25:02,796  INFO        Loaded 0 new rows for Chennai
+2026-06-08 12:25:02,796  INFO        Extracting → Kolkata
+2026-06-08 12:25:03,400  INFO        Transforming → Kolkata
+2026-06-08 12:25:03,416  INFO        Loaded 0 new rows for Kolkata
+2026-06-08 12:25:03,416  INFO        Extracting → Hyderabad
+2026-06-08 12:25:04,170  INFO        Transforming → Hyderabad
+2026-06-08 12:25:04,186  INFO        Loaded 0 new rows for Hyderabad
+2026-06-08 12:25:04,186  INFO        Extracting → Pune
+2026-06-08 12:25:04,792  INFO        Transforming → Pune
+2026-06-08 12:25:04,808  INFO        Loaded 0 new rows for Pune
+2026-06-08 12:25:04,813  INFO      Run complete — status=success, rows_loaded=0
+2026-06-08 12:25:04,813  INFO      ============================================================
+2026-06-08 12:25:04,814  INFO      Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-06-08 12:25:04,814  INFO      Next run scheduled in 24 hours. Press Ctrl+C to stop.
+2026-06-08 12:25:04,814  INFO      Added job "run_pipeline" to job store "default"
+2026-06-08 12:25:04,814  INFO      Scheduler started
