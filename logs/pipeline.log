@@ -65,3 +65,31 @@
 2026-06-08 12:25:04,814  INFO      Next run scheduled in 24 hours. Press Ctrl+C to stop.
 2026-06-08 12:25:04,814  INFO      Added job "run_pipeline" to job store "default"
 2026-06-08 12:25:04,814  INFO      Scheduler started
+2026-06-08 13:26:50,185  INFO      ============================================================
+2026-06-08 13:26:50,185  INFO      Pipeline run started
+2026-06-08 13:26:50,250  INFO        Extracting → Mumbai
+2026-06-08 13:26:51,040  INFO        Transforming → Mumbai
+2026-06-08 13:26:51,070  INFO        Loaded 48 new rows for Mumbai
+2026-06-08 13:26:51,071  INFO        Extracting → Delhi
+2026-06-08 13:26:51,681  INFO        Transforming → Delhi
+2026-06-08 13:26:51,706  INFO        Loaded 48 new rows for Delhi
+2026-06-08 13:26:51,707  INFO        Extracting → Indore
+2026-06-08 13:26:52,418  INFO        Transforming → Indore
+2026-06-08 13:26:52,442  INFO        Loaded 48 new rows for Indore
+2026-06-08 13:26:52,442  INFO        Extracting → Bangalore
+2026-06-08 13:26:53,050  INFO        Transforming → Bangalore
+2026-06-08 13:26:53,074  INFO        Loaded 48 new rows for Bangalore
+2026-06-08 13:26:53,074  INFO        Extracting → Chennai
+2026-06-08 13:26:53,655  INFO        Transforming → Chennai
+2026-06-08 13:26:53,677  INFO        Loaded 48 new rows for Chennai
+2026-06-08 13:26:53,678  INFO        Extracting → Kolkata
+2026-06-08 13:26:54,235  INFO        Transforming → Kolkata
+2026-06-08 13:26:54,262  INFO        Loaded 48 new rows for Kolkata
+2026-06-08 13:26:54,262  INFO        Extracting → Hyderabad
+2026-06-08 13:26:54,833  INFO        Transforming → Hyderabad
+2026-06-08 13:26:54,858  INFO        Loaded 48 new rows for Hyderabad
+2026-06-08 13:26:54,858  INFO        Extracting → Pune
+2026-06-08 13:26:55,419  INFO        Transforming → Pune
+2026-06-08 13:26:55,447  INFO        Loaded 48 new rows for Pune
+2026-06-08 13:26:55,454  INFO      Run complete — status=success, rows_loaded=384
+2026-06-08 13:26:55,454  INFO      ============================================================
