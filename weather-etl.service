@@ -1,0 +1,17 @@
+[Unit]
+Description=Weather ETL Pipeline
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# ── Update these two paths to match your actual install ──
+WorkingDirectory=/home/YOUR_USER/azentrix-fullstack-task1
+ExecStart=/home/YOUR_USER/azentrix-fullstack-task1/.venv/bin/python pipeline/etl.py
+Restart=on-failure
+RestartSec=30
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
