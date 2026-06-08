@@ -11,6 +11,7 @@ import requests
 import pandas as pd
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+import argparse
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
@@ -251,12 +252,29 @@ def run_pipeline():
 
 # ── Scheduler ──────────────────────────────────────────────────────────────────
 def main():
+    parser = argparse.ArgumentParser(description="Run the weather ETL pipeline.")
+    parser.add_argument(
+        "--once",
+        action="store_true",
+        help="Run the pipeline once and exit instead of starting the scheduler.",
+    )
+    args = parser.parse_args()
+
+    if args.once:
+        log.info("Running pipeline once via cron/no-scheduler mode")
+        run_pipeline()
+        return
+
     log.info("Starting ETL scheduler — interval: 24 h")
     run_pipeline()          # run immediately on start
 
     scheduler = BlockingScheduler(timezone="UTC")
     scheduler.add_job(run_pipeline, "interval", hours=24, id="etl_job")
     log.info("Next run scheduled in 24 hours. Press Ctrl+C to stop.")
+
+
+if __name__ == "__main__":
+    main()
 
     try:
         scheduler.start()

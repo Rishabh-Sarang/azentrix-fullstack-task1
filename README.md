@@ -120,6 +120,46 @@ loginctl enable-linger $USER
 
 ---
 
+## Running with cronie / cron
+
+This repo now supports one-shot ETL execution via `python pipeline/etl.py --once`, which is suitable for cron jobs.
+
+### 1. Install cronie
+
+```bash
+sudo pacman -S cronie
+sudo systemctl enable --now cronie
+```
+
+### 2. Create a cron entry
+
+Edit your user crontab with:
+
+```bash
+crontab -e
+```
+
+Then add a line like this to run once per day at midnight UTC:
+
+```cron
+0 0 * * * /home/YOUR_USER/azentrix-fullstack-task1/run_etl_once.sh >> /home/YOUR_USER/azentrix-fullstack-task1/logs/cron.log 2>&1
+```
+
+If you prefer using the Python interpreter directly, use:
+
+```cron
+0 0 * * * /home/YOUR_USER/azentrix-fullstack-task1/.venv/bin/python /home/YOUR_USER/azentrix-fullstack-task1/pipeline/etl.py --once >> /home/YOUR_USER/azentrix-fullstack-task1/logs/cron.log 2>&1
+```
+
+### 3. Verify the cron job
+
+```bash
+crontab -l
+journalctl -u cronie -f
+```
+
+---
+
 ## Database Schema
 
 ### `weather_hourly`
